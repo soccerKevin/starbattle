@@ -3,12 +3,13 @@
   left: 420px;
   top: 20px;
 
-  .next_group{
+  .btn{
     cursor: pointer;
     padding: 3px 8px;
-    border-radius: 4;
+    border-radius: 4px;
     background: blue;
     color: white;
+    margin-bottom: 5px;
 
     :hover{
       background: red;

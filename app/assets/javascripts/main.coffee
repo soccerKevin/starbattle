@@ -6,11 +6,16 @@ class Main
 
   handlers: ->
     @nextGroupHandler()
+    @startGameHandler()
 
   nextGroupHandler: ->
-    @controls.find('.next_group').on 'click', =>
+    @controls.on 'click', '.next_group', =>
       @map.currentGroup().paintBackground()
       @map.nextGroup()
+
+  startGameHandler: ->
+    @controls.on 'click', '.start_game', =>
+      @controls.find('.next_group').hide()
 
 $ ->
   window.main = new Main()
