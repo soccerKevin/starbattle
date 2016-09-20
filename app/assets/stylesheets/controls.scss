@@ -1,0 +1,17 @@
+.controls{
+  position: absolute;
+  left: 420px;
+  top: 20px;
+
+  .next_group{
+    cursor: pointer;
+    padding: 3px 8px;
+    border-radius: 4;
+    background: blue;
+    color: white;
+
+    :hover{
+      background: red;
+    }
+  }
+}
