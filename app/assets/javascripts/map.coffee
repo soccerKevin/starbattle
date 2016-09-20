@@ -2,10 +2,12 @@ class Map
   constructor: ->
     @element = $('.map')
     @groups = [new MapGroup()]
-    @currentGroup = 0
-    @createGroup()
+    @currentGroupIndex = 0
     @createSquares()
     @handlers()
+
+  currentGroup: ->
+    @groups[@currentGroupIndex]
 
   createSquares: ->
     @squares = []
@@ -13,14 +15,14 @@ class Map
       @squares.push new MapSquare elem
 
   nextGroup: ->
-    @currentGroup += 1
-    @createGroup() if !@groups[@currentGroup]
+    @currentGroupIndex += 1
+    @createGroup() if !@groups[@currentGroupIndex]
 
   createGroup: ->
-    @groups.push @currentGroup
+    @groups.push @currentGroupIndex
 
   addToCurrentGroup: (square)->
-    @currentGroup.addSquare square
+    @currentGroup().addSquare square
 
   handlers: ->
     @clickHandler()

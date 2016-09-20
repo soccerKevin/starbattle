@@ -8,9 +8,12 @@ class MapSquare
 
   clickHandler: ->
     @element.on 'click', =>
-      @element.css('background', 'blue')
       @trigger 'click'
       false
+
+  setColor: (r, g, b, a)->
+    @color = [r, g, b, a]
+    @element.css 'background': "rgba(#{r}, #{g}, #{b}, #{a})"
 
   trigger: (eventName, data=@)->
     @element.trigger "MapSquare.#{eventName}", data

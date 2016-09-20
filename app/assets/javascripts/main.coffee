@@ -9,6 +9,7 @@ class Main
 
   nextGroupHandler: ->
     @controls.find('.next_group').on 'click', =>
+      @map.currentGroup().paintBackground()
       @map.nextGroup()
 
 $ ->
