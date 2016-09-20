@@ -16,10 +16,10 @@ class Map
 
   nextGroup: ->
     @currentGroupIndex += 1
-    @createGroup() if !@groups[@currentGroupIndex]
+    @createGroup() if @groups[@currentGroupIndex] == undefined
 
   createGroup: ->
-    @groups.push @currentGroupIndex
+    @groups.push new MapGroup()
 
   addToCurrentGroup: (square)->
     @currentGroup().addSquare square
