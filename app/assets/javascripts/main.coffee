@@ -10,6 +10,7 @@ class Main
   handlers: ->
     @nextGroupHandler()
     @startGameHandler()
+    @findGameHandler()
     @saveHandler()
 
   nextGroupHandler: ->
@@ -24,6 +25,13 @@ class Main
   saveHandler: ->
     @controls.on 'click', '.save_map', =>
       @map.save()
+
+  findGameHandler: ->
+    @controls.on 'click', '.find_map', =>
+      @map.find @controls.find('.map_index').val()
+
+    @controls.on 'keyup', '.map_index', (e)=>
+      @map.find @controls.find('.map_index').val() if e.keyCode == 13
 
 $ ->
   window.main = new Main()

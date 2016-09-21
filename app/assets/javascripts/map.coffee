@@ -38,8 +38,11 @@ class Map
 
   save: ->
     mapJSON = { map: @toJSON() }
-    $.post '/map', mapJSON, (success)-> console.log "SUCCESS"
+    $.post '/map', mapJSON, (success)=> console.log "SUCCESS"
 
+  find: (index)->
+    $.get "/map/#{index}", (map)=>
+      console.log map
 
 
 window.Map = Map
