@@ -4,9 +4,13 @@ class Main
     @controls = $('.controls')
     @handlers()
 
+  startGame: ->
+    @controls.find('.next_group').hide()
+
   handlers: ->
     @nextGroupHandler()
     @startGameHandler()
+    @saveHandler()
 
   nextGroupHandler: ->
     @controls.on 'click', '.next_group', =>
@@ -15,7 +19,11 @@ class Main
 
   startGameHandler: ->
     @controls.on 'click', '.start_game', =>
-      @controls.find('.next_group').hide()
+      @startGame()
+
+  saveHandler: ->
+    @controls.on 'click', '.save_map', =>
+      @map.save()
 
 $ ->
   window.main = new Main()

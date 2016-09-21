@@ -22,6 +22,7 @@ class Map
     @groups.push new MapGroup()
 
   addToCurrentGroup: (square)->
+    square.groupIndex = @currentGroupIndex
     @currentGroup().addSquare square
 
   handlers: ->
@@ -30,5 +31,15 @@ class Map
   clickHandler: ->
     @element.on "MapSquare.click", (event, square)=>
       @addToCurrentGroup square
+
+  toJSON: ->
+    width: Math.floor Math.sqrt @squares.length
+    squares_attributes: @squares.map (square) -> square.toJSON()
+
+  save: ->
+    mapJSON = { map: @toJSON() }
+    $.post '/map', mapJSON, (success)-> console.log "SUCCESS"
+
+
 
 window.Map = Map

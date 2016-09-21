@@ -1,6 +1,8 @@
 class MapSquare
   constructor: (elem)->
     @element = $(elem)
+    @groupIndex = null
+    @state = null
     @handlers()
 
   handlers: ->
@@ -17,5 +19,9 @@ class MapSquare
 
   trigger: (eventName, data=@)->
     @element.trigger "MapSquare.#{eventName}", data
+
+  toJSON: ->
+    state: @state
+    group_index: @groupIndex
 
 window.MapSquare = MapSquare
