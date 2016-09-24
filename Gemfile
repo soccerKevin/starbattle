@@ -13,6 +13,7 @@ gem 'slim-rails'
 
 group :development, :test do
   gem 'byebug'
+  gem 'teaspoon-jasmine'
 end
 
 group :development do
