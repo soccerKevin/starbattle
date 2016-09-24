@@ -25,4 +25,4 @@ Array::last = (count = 1)->
   if selection.length < 2 then selection[0] else selection
 
 Array::compact = ->
-  @filter (elem)-> !!elem
+  @filter (elem)-> exists elem
