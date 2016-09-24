@@ -1,8 +1,8 @@
-Array::groupBy = (attr)->
-  groups = @map((element)-> eval("element.#{attr}")).uniq()
+Array::groupBy = (func)->
+  groups = @map((element)-> func(element)).compact().uniq()
   result = []
   for group in groups
-    result.push @filter (element) => eval("element.#{attr}") == group
+    result.push @filter (element) => func(element) == group
   result
 
 Array::uniq = ->
@@ -23,3 +23,6 @@ Array::last = (count = 1)->
   return @ if count < 1
   selection = @slice(@length - count, @length)
   if selection.length < 2 then selection[0] else selection
+
+Array::compact = ->
+  @filter (elem)-> !!elem
