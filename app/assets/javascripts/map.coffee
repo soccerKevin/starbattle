@@ -10,9 +10,7 @@ class Map
     @groups[@currentGroupIndex]
 
   createSquares: ->
-    @squares = []
-    @element.find('.map_square').each (index, elem)=>
-      @squares.push new MapSquare elem
+    @squares = @element.find('.map_square').get().map (elem)-> new MapSquare elem
 
   nextGroup: ->
     @currentGroupIndex += 1
@@ -36,8 +34,8 @@ class Map
     squares_attributes: @squares.map (square) -> square.toJSON()
 
   groupSquares: ->
-    newGroups = @squares.groupBy (square) => square.group()
-    @groups = newGroups.map (group)=> new MapGroup group
+    newGroups = @squares.groupBy (square) -> square.group()
+    @groups = newGroups.map (group) -> new MapGroup group
 
   paintGroups: ->
     @groups.forEach (group)=> group.paintBackground()
