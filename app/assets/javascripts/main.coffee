@@ -1,6 +1,6 @@
 class Main
   constructor: ->
-    @map = new Map()
+    @map = new Map '.map'
     @controls = $('.controls')
     @handlers()
 
@@ -24,14 +24,30 @@ class Main
 
   saveHandler: ->
     @controls.on 'click', '.save_map', =>
-      @map.save()
+      MapService.save @map
 
   findGameHandler: ->
     @controls.on 'click', '.find_map', =>
-      @map.find @controls.find('.map_index').val()
+      @findAndReplaceMapFromInput()
 
     @controls.on 'keyup', '.map_index', (e)=>
-      @map.find @controls.find('.map_index').val() if e.keyCode == 13
+      @findAndReplaceMapFromInput() if e.keyCode == 13
+
+  findAndReplaceMapFromInput: ->
+    @findMapFromInput()
+    .done (map)=>
+      @replaceMap Map.createFrom map
+
+  findMapFromInput: ->
+    MapService.find(@mapIndexFromInput())
+
+  mapIndexFromInput: ->
+    @controls.find('.map_index').val()
+
+  replaceMap: (map)->
+    console.log @map.element
+    console.log map.element
+    @map.element.replaceWith map.element.clone()
 
 $ ->
   window.main = new Main()

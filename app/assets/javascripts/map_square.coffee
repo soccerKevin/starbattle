@@ -13,6 +13,9 @@ class MapSquare
       @trigger 'click'
       false
 
+  group: ->
+    parseInt @element.attr('data-group_index')
+
   setColor: (r, g, b, a)->
     @color = [r, g, b, a]
     @element.css 'background': "rgba(#{r}, #{g}, #{b}, #{a})"

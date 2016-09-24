@@ -1,6 +1,6 @@
 class Map
-  constructor: ->
-    @element = $('.map')
+  constructor: (map_selector)->
+    @element = $ map_selector
     @groups = [new MapGroup()]
     @currentGroupIndex = 0
     @createSquares()
@@ -36,13 +36,28 @@ class Map
     width: Math.floor Math.sqrt @squares.length
     squares_attributes: @squares.map (square) -> square.toJSON()
 
-  save: ->
-    mapJSON = { map: @toJSON() }
-    $.post '/map', mapJSON, (success)=> console.log "SUCCESS"
+  regroupSquares: ->
+    @groups = []
+    newGroups = @squares.groupBy 'group()'
+    for group in newGroups
+      g = new MapGroup group
+      g.paintBackground()
+      @groups.push g
 
-  find: (index)->
-    $.get "/map/#{index}", (map)=>
-      console.log map
+  @createFrom: (mapJSON)->
+    $('body').append $("<div class='map_creator'></div>")
+    $creator = $('.map_creator')
+    $element = $("<div class='map'></div>")
+    $creator.append $element
+    for square in mapJSON.squares
+      $element.append $("<div class='map_square' data-group_index='#{square.group_index}'></div>")
+
+    map = new Map '.map_creator .map'
+    map.regroupSquares()
+    $creator.detach()
+    map
+
+
 
 
 window.Map = Map

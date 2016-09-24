@@ -1,6 +1,5 @@
 class MapGroup
-  constructor: ->
-    @squares = []
+  constructor: (@squares =[])->
     @options = { background: new Color() }
 
   # applyOptions: ->
