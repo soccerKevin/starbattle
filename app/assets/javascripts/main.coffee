@@ -47,7 +47,7 @@ class Main
     @controls.find('.map_index').val()
 
   replaceMap: (map)->
-    @map.element.replaceWith map.element.clone()
+    @map.element.replaceWith map.element
     @map = map
 
 $ ->
