@@ -37,6 +37,8 @@ class Main
     @findMapFromInput()
     .done (map)=>
       @replaceMap Map.createFrom map
+    .fail (err) =>
+      alert "failed to load map"
 
   findMapFromInput: ->
     MapService.find(@mapIndexFromInput())
@@ -45,9 +47,8 @@ class Main
     @controls.find('.map_index').val()
 
   replaceMap: (map)->
-    console.log @map.element
-    console.log map.element
     @map.element.replaceWith map.element.clone()
+    @map = map
 
 $ ->
   window.main = new Main()

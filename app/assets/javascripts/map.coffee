@@ -29,20 +29,18 @@ class Map
     @clickHandler()
 
   clickHandler: ->
-    @element.on "MapSquare.click", (event, square)=>
-      @addToCurrentGroup square
+    @element.on "MapSquare.click", (event, square)=> @addToCurrentGroup square
 
   toJSON: ->
     width: Math.floor Math.sqrt @squares.length
     squares_attributes: @squares.map (square) -> square.toJSON()
 
-  regroupSquares: ->
-    @groups = []
-    newGroups = @squares.groupBy 'group()'
-    for group in newGroups
-      g = new MapGroup group
-      g.paintBackground()
-      @groups.push g
+  groupSquares: ->
+    newGroups = @squares.groupBy (square) => square.group()
+    @groups = newGroups.map (group)=> new MapGroup group
+
+  paintGroups: ->
+    @groups.forEach (group)=> group.paintBackground()
 
   @createFrom: (mapJSON)->
     $('body').append $("<div class='map_creator'></div>")
@@ -53,7 +51,8 @@ class Map
       $element.append $("<div class='map_square' data-group_index='#{square.group_index}'></div>")
 
     map = new Map '.map_creator .map'
-    map.regroupSquares()
+    map.groupSquares()
+    map.paintGroups()
     $creator.detach()
     map
 
