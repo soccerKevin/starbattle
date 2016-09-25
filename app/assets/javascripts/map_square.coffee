@@ -1,7 +1,6 @@
 class MapSquare
   constructor: (elem)->
     @element = $(elem)
-    @groupIndex = null
     @state = null
     @handlers()
 
@@ -14,7 +13,11 @@ class MapSquare
       false
 
   group: ->
-    parseInt @element.attr('data-group_index')
+    group = parseInt @element.attr 'data-group_index'
+    if isNaN group then null else group
+
+  setGroup: (index)->
+    @element.attr 'data-group_index', index
 
   setColor: (r, g, b, a)->
     @color = [r, g, b, a]
@@ -25,6 +28,6 @@ class MapSquare
 
   toJSON: ->
     state: @state
-    group_index: @groupIndex
+    group_index: @group()
 
 window.MapSquare = MapSquare

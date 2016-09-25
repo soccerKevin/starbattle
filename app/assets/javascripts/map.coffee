@@ -20,7 +20,7 @@ class Map
     @groups.push new MapGroup()
 
   addToCurrentGroup: (square)->
-    square.groupIndex = @currentGroupIndex
+    square.setGroup @currentGroupIndex
     @currentGroup().addSquare square
 
   handlers: ->
