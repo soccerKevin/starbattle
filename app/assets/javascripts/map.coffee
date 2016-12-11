@@ -1,41 +1,12 @@
 class Map
   constructor: (map_selector)->
     @element = $ map_selector
-    @groups = [new MapGroup()]
-    @currentGroupIndex = 0
-    @createSquares()
-    @handlers()
-
-  currentGroup: ->
-    @groups[@currentGroupIndex]
-
-  createSquares: ->
-    @squares = @element.find('.map_square').get().map (elem)-> new MapSquare elem
-
-  nextGroup: ->
-    @currentGroupIndex += 1
-    @createGroup() if @groups[@currentGroupIndex] == undefined
-
-  createGroup: ->
-    @groups.push new MapGroup()
-
-  addToCurrentGroup: (square)->
-    square.setGroup @currentGroupIndex
-    @currentGroup().addSquare square
-
-  handlers: ->
-    @clickHandler()
-
-  clickHandler: ->
-    @element.on "MapSquare.click", (event, square)=> @addToCurrentGroup square
+    @board = Board.default()
 
   toJSON: ->
     width: Math.floor Math.sqrt @squares.length
-    squares_attributes: @squares.map (square) -> square.toJSON()
-
-  groupSquares: ->
-    newGroups = @squares.groupBy (square) -> square.group()
-    @groups = newGroups.map (group) -> new MapGroup group
+    squares_attributes: @squares.map (square) ->
+      square.toJSON()
 
   paintGroups: ->
     @groups.forEach (group)=> group.paintBackground()

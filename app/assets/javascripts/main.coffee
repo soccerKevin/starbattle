@@ -1,6 +1,6 @@
 class Main
   constructor: ->
-    @map = new Map '.map'
+    @map = new MapCreator '.map'
     @controls = $('.controls')
     @handlers()
 

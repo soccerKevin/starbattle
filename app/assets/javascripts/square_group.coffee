@@ -1,4 +1,4 @@
-class MapGroup
+class SquareGroup
   constructor: (@squares =[])->
     @options = { background: new Color() }
 
@@ -15,4 +15,4 @@ class MapGroup
     square.setColor r, g, b, a
     @squares.push square
 
-window.MapGroup = MapGroup
+window.SquareGroup = SquareGroup
