@@ -8,15 +8,9 @@ class Main
     @controls.find('.next_group').hide()
 
   handlers: ->
-    @nextGroupHandler()
     @startGameHandler()
     @findGameHandler()
     @saveHandler()
-
-  nextGroupHandler: ->
-    @controls.on 'click', '.next_group', =>
-      @map.currentGroup().paintBackground()
-      @map.nextGroup()
 
   startGameHandler: ->
     @controls.on 'click', '.start_game', =>

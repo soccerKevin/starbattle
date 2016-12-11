@@ -9,7 +9,8 @@ class Map
       square.toJSON()
 
   paintGroups: ->
-    @groups.forEach (group)=> group.paintBackground()
+    @groups.forEach (group)=>
+      group.paintBackground()
 
   @createFrom: (mapJSON)->
     $('body').append $("<div class='map_creator'></div>")

@@ -1,7 +1,7 @@
 class BoardBuilder extends Board
   constructor: (element, squares)->
     super element, squares
-    @groups = [new SquareGroup]
+    @groups = [new SquareGroup()]
     @currentGroupIndex = 0
 
   # class self
@@ -11,7 +11,8 @@ class BoardBuilder extends Board
       new MapSquare elem
 
   currentGroup: ->
-    @groups[@currentGroupIndex]
+    current = @groups[@currentGroupIndex]
+    if current then current else @groups[@currentGroupIndex] = new SquareGroup()
 
   nextGroup: ->
     @currentGroupIndex += 1
