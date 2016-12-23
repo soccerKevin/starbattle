@@ -1,6 +1,6 @@
 class Main
   constructor: ->
-    @mapCreator = new MapCreator '.map'
+    @mapCreator = new MapCreator()
     @controls = $('.controls')
     @handlers()
 
@@ -30,7 +30,7 @@ class Main
       alert "failed to load map"
 
   findMapFromInput: ->
-    MapService.find(@mapIndexFromInput())
+    MapService.find @mapIndexFromInput()
 
   mapIndexFromInput: ->
     @controls.find('.map_index').val()

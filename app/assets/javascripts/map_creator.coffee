@@ -1,5 +1,5 @@
 class MapCreator extends Map
-  constructor: (map_selector)->
+  constructor: (map_selector='.map')->
     super map_selector
     @board = new Board()
     @controls = $('.controls')
