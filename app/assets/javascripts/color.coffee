@@ -10,4 +10,8 @@ class Color
   rgbaString: ->
     "#{@r}, #{@g}, #{@b}, #{@a}"
 
+  @fromString: (colorString)->
+    [r,g,b,a] = colorString.split ','
+    new Color r, g, b, a
+
 window.Color = Color
