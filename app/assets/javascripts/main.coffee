@@ -1,6 +1,6 @@
 class Main
   constructor: ->
-    @map = new MapCreator '.map'
+    @mapCreator = new MapCreator '.map'
     @controls = $('.controls')
     @handlers()
 
@@ -10,15 +10,10 @@ class Main
   handlers: ->
     @startGameHandler()
     @findGameHandler()
-    @saveHandler()
 
   startGameHandler: ->
     @controls.on 'click', '.start_game', =>
       @startGame()
-
-  saveHandler: ->
-    @controls.on 'click', '.save_map', =>
-      MapService.save @map
 
   findGameHandler: ->
     @controls.on 'click', '.find_map', =>

@@ -1,7 +1,7 @@
 class Map
   constructor: (map_selector)->
     @element = $ map_selector
-    @board = Board.default()
+    @board = new Board()
 
   toJSON: ->
     width: Math.floor Math.sqrt @squares.length

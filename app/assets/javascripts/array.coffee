@@ -26,3 +26,13 @@ Array::last = (count = 1)->
 
 Array::compact = ->
   @filter (elem)-> exists elem
+
+Array::group = (func)->
+  groups = {}
+  iterator = @values()
+  while element = iterator.next().value
+    bucket = func element
+    groups[bucket] = [] unless !!groups[bucket]
+    groups[bucket].push element
+
+  groups

@@ -7,4 +7,7 @@ class Color
   toArray: ->
     [@r, @g, @b, @a]
 
+  rgbaString: ->
+    "#{@r}, #{@g}, #{@b}, #{@a}"
+
 window.Color = Color

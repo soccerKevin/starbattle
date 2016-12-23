@@ -1,20 +1,29 @@
 class MapCreator extends Map
   constructor: (map_selector)->
     super map_selector
-    @board = BoardBuilder.fromDOM '.map'
+    @board = new Board()
     @controls = $('.controls')
+    @currentGroup = 0
+    @groupColors = [new Color()]
     @handlers()
 
   handlers: ->
     @squareClickHandler()
     @nextGroupHandler()
+    @saveHandler()
+
+  saveHandler: ->
+    @controls.on 'click', '.save_map', =>
+      MapService.save @
 
   squareClickHandler: ->
-    @element.on "MapSquare.click", (event, square)=>
-      @board.addToCurrentGroup square
+    @element.on "SquareCreator.click", (event, square)=>
+      square.setGroup @currentGroup
+      square.setColor @groupColors[@currentGroup]
 
   nextGroupHandler: ->
     @controls.on 'click', '.next_group', =>
-      @board.nextGroup()
+      @currentGroup += 1
+      @groupColors.push new Color()
 
 window.MapCreator = MapCreator
