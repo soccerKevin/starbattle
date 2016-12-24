@@ -16,6 +16,6 @@ class MapController < ApplicationController
   private
 
   def map_params
-    params.require(:map).permit([:width, squares_attributes: [:group_index, :state] ])
+    params.require(:map).permit([:name, :width, squares_attributes: [:group_index, :state] ])
   end
 end

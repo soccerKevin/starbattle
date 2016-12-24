@@ -2,15 +2,7 @@ class Map
   constructor: (map_selector)->
     @element = $ map_selector
     @board = new Board()
-
-  toJSON: ->
-    width: Math.floor Math.sqrt @squares.length
-    squares_attributes: @squares.map (square) ->
-      square.toJSON()
-
-  paintGroups: ->
-    @groups.forEach (group)=>
-      group.paintBackground()
+    @handlers()
 
   @createFrom: (mapJSON)->
     $('body').append $("<div class='map_creator'></div>")
@@ -26,7 +18,29 @@ class Map
     $creator.detach()
     map
 
+  toJSON: ->
+    name: @name()
+    width: Math.floor Math.sqrt @squares.length
+    squares_attributes: @squares.map (square) ->
+      square.toJSON()
 
+  name: (fetch=false)->
+    unsetName if fetch
+    @nameCache ||= @element.siblings('.name').val()
+
+  unsetName: ->
+    @nameCache = null
+
+  paintGroups: ->
+    @groups.forEach (group)=>
+      group.paintBackground()
+
+  handlers: ->
+    @saveNameHandler()
+
+  saveNameHandler: ->
+    @element.siblings('.name').on 'keyup', ->
+      @name true
 
 
 window.Map = Map
