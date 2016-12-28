@@ -1,8 +1,12 @@
 .map_container{
   .name{
-    border-radius: 5px;
-    border-color: rgba(0, 0, 0, .4);
-    margin-bottom: 5px;
+    border: none;
+
+    &:hover, &:focus{
+      border-radius: 5px;
+      border-color: rgba(0, 0, 0, .4);
+      margin-bottom: 5px;
+    }
   }
 
   .map{

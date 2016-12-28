@@ -15,6 +15,7 @@ gem 'better_errors'
 group :development, :test do
   gem 'byebug'
   gem 'teaspoon-jasmine'
+  gem 'pry'
 end
 
 group :development do
