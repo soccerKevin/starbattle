@@ -1,10 +1,3 @@
-Array::groupBy = (func)->
-  groups = @map((element)-> func(element)).compact().uniq()
-  result = []
-  for group in groups
-    result.push @filter (element) => func(element) == group
-  result
-
 Array::uniq = ->
   uniq = []
   @forEach (element)=>
@@ -29,10 +22,15 @@ Array::compact = ->
 
 Array::group = (func)->
   groups = {}
-  iterator = @values()
-  while element = iterator.next().value
+  for element in @
     bucket = func element
     groups[bucket] = [] unless !!groups[bucket]
     groups[bucket].push element
 
   groups
+
+Array::is_empty = ->
+  @length < 1
+
+Array::present = ->
+  @length > 0

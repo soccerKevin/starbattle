@@ -20,13 +20,16 @@ class Map
 
   toJSON: ->
     name: @name()
-    width: Math.floor Math.sqrt @squares.length
-    squares_attributes: @squares.map (square) ->
+    width: @width()
+    squares_attributes: @board.squares().map (square) ->
       square.toJSON()
 
   name: (fetch=false)->
-    unsetName if fetch
+    @unsetName() if fetch
     @nameCache ||= @element.siblings('.name').val()
+
+  width: ->
+    Math.floor Math.sqrt @board.squares().length
 
   unsetName: ->
     @nameCache = null
@@ -40,7 +43,9 @@ class Map
 
   saveNameHandler: ->
     @element.siblings('.name').on 'keyup', ->
-      @name true
+      @unsetName()
+
+    @element.siblings('.name').on '', ->
 
 
 window.Map = Map

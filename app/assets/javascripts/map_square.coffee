@@ -1,10 +1,9 @@
 class MapSquare
   constructor: (elem)->
     @element = $(elem)
-    @state = null
-    @handlers()
+    @parentHandlers()
 
-  handlers: ->
+  parentHandlers: ->
     @clickHandler()
 
   clickHandler: ->
@@ -16,11 +15,15 @@ class MapSquare
     group = parseInt @element.attr 'data-group_index'
     if isNaN group then null else group
 
+  color: ->
+    @element.attr 'color'
+
   trigger: (eventName, data=@)->
     @element.trigger "MapSquare.#{eventName}", data
 
   toJSON: ->
     state: @state
     group_index: @group()
+    color: @color()
 
 window.MapSquare = MapSquare

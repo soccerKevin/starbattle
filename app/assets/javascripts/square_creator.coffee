@@ -1,4 +1,4 @@
-class SquareCreator
+class SquareCreator extends MapSquare
   constructor: (elem)->
     @element = $(elem)
     @handlers()

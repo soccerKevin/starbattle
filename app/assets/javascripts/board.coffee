@@ -17,12 +17,13 @@ class Board
     @squaresCache = null
 
   groups: (reset=false)->
-    unsetGroups if reset
-    @groups ||= @squares().group (square)->
+    @unsetGroups() if reset
+    @groupsCache ||= @squares().group (square)->
       square.group()
 
   unsetGroups: ->
-    @groups = null
-
+    @groupsCache = null
 
 window.Board = Board
+
+

@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20160920055611) do
   create_table "squares", force: :cascade do |t|
     t.integer "map_id"
     t.integer "group_index"
+    t.string  "color"
     t.string  "state"
   end
 

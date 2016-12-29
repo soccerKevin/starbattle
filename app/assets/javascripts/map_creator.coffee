@@ -3,7 +3,7 @@ class MapCreator extends Map
     super map_selector
     @board = new Board()
     @controls = $('.controls')
-    @currentGroup = 0
+    @currentGroupIndex = 0
     @groupColors = [new Color()]
     @handlers()
 
@@ -18,12 +18,16 @@ class MapCreator extends Map
 
   squareClickHandler: ->
     @element.on "SquareCreator.click", (event, square)=>
-      square.setGroup @currentGroup
-      square.setColor @groupColors[@currentGroup]
+      square.setGroup @currentGroupIndex
+      square.setColor @groupColors[@currentGroupIndex]
 
   nextGroupHandler: ->
     @controls.on 'click', '.next_group', =>
-      @currentGroup += 1
+      return if @currentGroup(true).is_empty()
+      @currentGroupIndex += 1
       @groupColors.push new Color()
+
+  currentGroup: (resetGroups=false)->
+    @board.groups(resetGroups)[@currentGroupIndex]
 
 window.MapCreator = MapCreator

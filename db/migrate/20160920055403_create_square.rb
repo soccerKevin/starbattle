@@ -3,6 +3,7 @@ class CreateSquare < ActiveRecord::Migration
     create_table :squares do |t|
       t.references :map
       t.integer    :group_index
+      t.string     :color
       t.string     :state
     end
   end

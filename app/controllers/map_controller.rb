@@ -9,13 +9,18 @@ class MapController < ApplicationController
   end
 
   def create
-    @map = Map.create map_params rescue return render 'public/404', status: 401
+    begin
+      @map = Map.create! map_params
+    rescue Exception => e
+      pp "Map creation error: ", e
+      return render json: e.to_json , status: 400
+    end
     render json: @map, status: 200
   end
 
   private
 
   def map_params
-    params.require(:map).permit([:name, :width, squares_attributes: [:group_index, :state] ])
+    params.require(:map).permit([:name, :width, squares_attributes: [:group_index, :color] ])
   end
 end
