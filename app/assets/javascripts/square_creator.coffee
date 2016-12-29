@@ -15,8 +15,6 @@ class SquareCreator
     @element.attr 'data-group_index', index
 
   setColor: (color)->
-    console.log 'setting'
-    console.log color
     @element.css 'background': "rgba(#{color.rgbaString()})"
     @element.attr 'color', color.rgbaString()
 

@@ -2,7 +2,7 @@ class Map
   constructor: (map_selector)->
     @element = $ map_selector
     @board = new Board()
-    @handlers()
+    @parentHandlers()
 
   @createFrom: (mapJSON)->
     $('body').append $("<div class='map_creator'></div>")
@@ -35,7 +35,7 @@ class Map
     @groups.forEach (group)=>
       group.paintBackground()
 
-  handlers: ->
+  parentHandlers: ->
     @saveNameHandler()
 
   saveNameHandler: ->
