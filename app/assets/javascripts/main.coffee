@@ -26,8 +26,8 @@ class Main
     @findMapFromInput()
     .done (map)=>
       @replaceMap Map.createFrom map
-    .fail (err) =>
-      alert "failed to load map", err
+    .fail (xhr, status, err) =>
+      alert "map error: #{err}"
 
   findMapFromInput: ->
     input = @mapIndexFromInput()

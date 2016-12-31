@@ -4,16 +4,16 @@ class MapController < ApplicationController
   end
 
   def show
-    @map = Map.find params[:id] rescue return render 'public/404', status: 404
+    @map = Map.find! params[:id] rescue return render 'public/404', status: 404
     render json: @map.to_json(include: :squares), status: 200
   end
 
   def show_query
     begin
-      @map = Map.find_by(name: params[:name])
+      @map = Map.find_by! name: params[:name]
     rescue Exception => e
       pp "Map Query Error: ", e
-      return render 'public/404', status: 404
+      return render json: e.to_json, status: 404
     end
     render json: @map.to_json(include: :squares), status: 200
   end

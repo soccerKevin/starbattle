@@ -9,8 +9,8 @@ class MapService
     mapJSON = { map: map.toJSON() }
     $.post('/map', mapJSON)
     .done( (map)=>
-      alert "map saved"
+      alert "saved map: #{map.name}"
     ).fail (xhr, status, error)=>
-      console.log "Map save error: ", error
+      alert "Map save error: ", error
 
 window.MapService = MapService
