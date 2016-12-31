@@ -1,6 +1,6 @@
 class Main
   constructor: ->
-    @mapCreator = new MapCreator()
+    @map = new MapCreator()
     @controls = $('.controls')
     @handlers()
 
@@ -27,10 +27,14 @@ class Main
     .done (map)=>
       @replaceMap Map.createFrom map
     .fail (err) =>
-      alert "failed to load map"
+      alert "failed to load map", err
 
   findMapFromInput: ->
-    MapService.find @mapIndexFromInput()
+    input = @mapIndexFromInput()
+    if isNaN parseInt input
+      MapService.findName input
+    else
+      MapService.findIndex input
 
   mapIndexFromInput: ->
     @controls.find('.map_index').val()

@@ -16,10 +16,16 @@ class MapSquare
     if isNaN group then null else group
 
   color: ->
-    @element.attr 'color'
+    Color.fromString @element.attr 'color'
 
   trigger: (eventName, data=@)->
     @element.trigger "MapSquare.#{eventName}", data
+
+  paintBackground: ->
+    @element.css 'background', "rgba(#{@color().rgbaString()})"
+
+  @HTMLfromJSON: (json)->
+    $("<div class='map_square' data-group_index='#{json.group_index}' color='#{json.color}'></div>")
 
   toJSON: ->
     state: @state

@@ -18,8 +18,14 @@ class Board
 
   groups: (reset=false)->
     @unsetGroups() if reset
-    @groupsCache ||= @squares().group (square)->
+    @groupsCache ||= @groupSquares()
+
+  groupSquares: ->
+    groupedSquares = @squares().group (square)->
       square.group()
+    delete groupedSquares['null']
+    Object.values(groupedSquares).map (squares)->
+      new Group squares
 
   unsetGroups: ->
     @groupsCache = null

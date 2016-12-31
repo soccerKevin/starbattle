@@ -1,7 +1,7 @@
 class Map
   constructor: (map_selector)->
     @element = $ map_selector
-    @board = new Board()
+    @board = new Board map_selector
     @parentHandlers()
 
   @createFrom: (mapJSON)->
@@ -9,11 +9,10 @@ class Map
     $creator = $('.map_creator')
     $element = $("<div class='map'></div>")
     $creator.append $element
-    for square in mapJSON.squares
-      $element.append $("<div class='map_square' data-group_index='#{square.group_index}'></div>")
+    for squareJSON in mapJSON.squares
+      $element.append MapSquare.HTMLfromJSON squareJSON
 
     map = new Map '.map_creator .map'
-    map.groupSquares()
     map.paintGroups()
     $creator.detach()
     map
@@ -35,7 +34,7 @@ class Map
     @nameCache = null
 
   paintGroups: ->
-    @groups.forEach (group)=>
+    for group in @board.groups()
       group.paintBackground()
 
   parentHandlers: ->

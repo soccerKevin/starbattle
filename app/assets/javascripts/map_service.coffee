@@ -1,6 +1,9 @@
 class MapService
-  @find: (index)->
+  @findIndex: (index)->
     $.get "/map/#{index}"
+
+  @findName: (name)->
+    $.get "/map?name=#{name}"
 
   @save: (map)->
     mapJSON = { map: map.toJSON() }

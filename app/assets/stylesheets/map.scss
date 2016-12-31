@@ -1,11 +1,13 @@
 .map_container{
   .name{
     border: none;
+    font-size: 24px;
+    text-transform: capitalize;
+    margin-bottom: 8px;
 
     &:hover, &:focus{
       border-radius: 5px;
       border-color: rgba(0, 0, 0, .4);
-      margin-bottom: 5px;
     }
   }
 
