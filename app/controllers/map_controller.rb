@@ -8,6 +8,16 @@ class MapController < ApplicationController
     render json: @map.to_json(include: :squares), status: 200
   end
 
+  def show_query
+    begin
+      @map = Map.find_by(name: params[:name])
+    rescue Exception => e
+      pp "Map Query Error: ", e
+      return render 'public/404', status: 404
+    end
+    render json: @map.to_json(include: :squares), status: 200
+  end
+
   def create
     begin
       @map = Map.create! map_params
