@@ -40,6 +40,7 @@ class Main
     @controls.find('.map_index').val()
 
   replaceMap: (map)->
+    @map.element.siblings('.name').val map.name()
     @map.element.replaceWith map.element
     @map = map
 

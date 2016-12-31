@@ -1,6 +1,7 @@
 class Map
-  constructor: (map_selector)->
+  constructor: (map_selector, name='')->
     @element = $ map_selector
+    @setName name
     @board = new Board map_selector
     @parentHandlers()
 
@@ -12,7 +13,7 @@ class Map
     for squareJSON in mapJSON.squares
       $element.append MapSquare.HTMLfromJSON squareJSON
 
-    map = new Map '.map_creator .map'
+    map = new Map '.map_creator .map', mapJSON.name
     map.paintGroups()
     $creator.detach()
     map
@@ -22,6 +23,9 @@ class Map
     width: @width()
     squares_attributes: @board.squares().map (square) ->
       square.toJSON()
+
+  setName: (name)->
+    @nameCache = name
 
   name: (fetch=false)->
     @unsetName() if fetch
@@ -44,7 +48,8 @@ class Map
     @element.siblings('.name').on 'keyup', ->
       @unsetName()
 
-    @element.siblings('.name').on '', ->
+    @element.siblings('.name').on 'blur', ->
+      @name true
 
 
 window.Map = Map
