@@ -8,11 +8,13 @@ Array::includes = (element)->
   @indexOf(element) > -1
 
 Array::first = (count = 1)->
+  # if count < 1 then @ else @[0..count]
   return @ if count < 1
   selection = @slice(0, count)
   if selection.length < 2 then selection[0] else selection
 
 Array::last = (count = 1)->
+  # if count < 1 then @ else @[-count..-1]
   return @ if count < 1
   selection = @slice(@length - count, @length)
   if selection.length < 2 then selection[0] else selection

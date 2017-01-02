@@ -1,6 +1,6 @@
 class MapController < ApplicationController
   def new
-    @map_size = 9
+    @map_size = 8
   end
 
   def show
