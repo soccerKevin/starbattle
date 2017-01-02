@@ -6,5 +6,7 @@ html
     = javascript_include_tag 'application'
     = csrf_meta_tags
   body
-    = yield
-    = render partial: 'map/controls'
+    = render 'game_controls'
+    .container
+      = yield
+      = render partial: 'map/controls'

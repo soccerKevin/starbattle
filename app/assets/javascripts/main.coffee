@@ -1,48 +1,31 @@
 class Main
   constructor: ->
-    @map = new MapCreator()
-    @controls = $('.controls')
+    @showNewMap()
+    @gameControls = new GameControls()
     @handlers()
 
-  startGame: ->
-    @controls.find('.next_group').hide()
-
   handlers: ->
-    @startGameHandler()
-    @findGameHandler()
+    @newMapHandler()
+    @solveMapHandler()
 
-  startGameHandler: ->
-    @controls.on 'click', '.start_game', =>
-      @startGame()
+  newMapHandler: ->
+    @gameControls.element.on 'GameControls.newMap', =>
+      @hideMaps()
+      @showNewMap()
 
-  findGameHandler: ->
-    @controls.on 'click', '.find_map', =>
-      @findAndReplaceMapFromInput()
+  solveMapHandler: ->
+    @gameControls.element.on 'GameControls.solveMap', =>
+      @hideMaps()
+      @showSolveMap()
 
-    @controls.on 'keyup', '.map_index', (e)=>
-      @findAndReplaceMapFromInput() if e.keyCode == 13
+  hideMaps: ->
+    @map.hide()
 
-  findAndReplaceMapFromInput: ->
-    @findMapFromInput()
-    .done (map)=>
-      @replaceMap Map.createFrom map
-    .fail (xhr, status, err) =>
-      alert "map error: #{err}"
+  showNewMap: ->
+    @map = new MapCreator()
 
-  findMapFromInput: ->
-    input = @mapIndexFromInput()
-    if isNaN parseInt input
-      MapService.findName input
-    else
-      MapService.findIndex input
-
-  mapIndexFromInput: ->
-    @controls.find('.map_index').val()
-
-  replaceMap: (map)->
-    @map.element.siblings('.name').val map.name()
-    @map.element.replaceWith map.element
-    @map = map
+  showSolveMap: ->
+    @map = new MapSolver()
 
 $ ->
   window.main = new Main()

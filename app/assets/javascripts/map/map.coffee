@@ -51,5 +51,8 @@ class Map
     @element.siblings('.name').on 'blur', ->
       @name true
 
+  hide: ->
+    @controls.hide()
+
 
 window.Map = Map
