@@ -1,7 +1,3 @@
 .map_container
   input.name type="text" placeholder="name"
-  .map
-    .squares_container
-     -(0...@map_size).each do
-       -(0...@map_size).each do
-        = render partial: 'map_square'
+  = render partial: 'map'

@@ -51,6 +51,9 @@ class Map
     @element.siblings('.name').on 'blur', ->
       @name true
 
+  trigger: (eventName, eventData)->
+    @element.trigger "Map.#{eventName}", eventData
+
   hide: ->
     @controls.hide()
 

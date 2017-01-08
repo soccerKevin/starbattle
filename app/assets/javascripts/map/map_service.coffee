@@ -1,4 +1,7 @@
 class MapService
+  @newMap: (size)->
+    $.get "/map/new?size=#{size}"
+
   @findIndex: (index)->
     $.get "/map/#{index}"
 

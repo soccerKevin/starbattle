@@ -1,0 +1,5 @@
+.map size=@map_size
+  .squares_container
+   -(0...@map_size).each do
+     -(0...@map_size).each do
+      = render partial: 'map_square'

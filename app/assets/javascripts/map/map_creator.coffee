@@ -11,6 +11,7 @@ class MapCreator extends Map
     @squareClickHandler()
     @nextGroupHandler()
     @saveHandler()
+    @changeSizeHandler()
 
   saveHandler: ->
     @controls.off 'click', '.save_map'
@@ -26,9 +27,22 @@ class MapCreator extends Map
   nextGroupHandler: ->
     @controls.off 'click', '.next_group'
     @controls.on 'click', '.next_group', =>
-      return if @currentGroup(true).is_empty()
+      return true if @currentGroup(true).is_empty()
       @currentGroupIndex += 1
       @groupColors.push new Color()
+
+  changeSizeHandler: ->
+    @controls.find('.change_size input').off 'click'
+    @controls.find('.change_size input').on 'click', =>
+      false
+
+    @controls.off 'click', '.change_size'
+    @controls.on 'click', '.change_size', =>
+      size = parseInt @controls.find('.change_size input').val()
+      MapService.newMap(size)
+      .done (map) =>
+        @element.replaceWith $(map.map)
+        @element = $ '.map'
 
   currentGroup: (resetGroups=false)->
     @board.groups(resetGroups)[@currentGroupIndex]

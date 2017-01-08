@@ -1,6 +1,11 @@
 class MapController < ApplicationController
   def new
-    @map_size = 8
+    if params[:size]
+      @map_size = params[:size].to_i
+      return render json: { map: render_to_string(partial: '/map/map') }
+    else
+      @map_size = 8
+    end
   end
 
   def show
@@ -31,6 +36,6 @@ class MapController < ApplicationController
   private
 
   def map_params
-    params.require(:map).permit([:name, :width, squares_attributes: [:group_index, :color] ])
+    params.require(:map).permit([:name, :width, :size, squares_attributes: [:group_index, :color] ])
   end
 end

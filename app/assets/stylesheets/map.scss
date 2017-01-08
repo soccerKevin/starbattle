@@ -1,6 +1,4 @@
 .map_container{
-  width: 340px;
-
   .name{
     border: none;
     font-size: 24px;
@@ -17,8 +15,26 @@
     border: solid 8px rgba(50, 255, 50, 1);
     border-radius: 12px;
     background: rgba(0, 255, 80, .5);
-    width: 322px;
-    height: 322px;
+
+    &[size='7']{
+      width: 282px;
+      height: 282px;
+    }
+
+    &[size='8']{
+      width: 322px;
+      height: 322px;
+    }
+
+    &[size='9']{
+      width: 362px;
+      height: 362px;
+    }
+
+    &[size='10']{
+      width: 402px;
+      height: 402px;
+    }
 
     .squares_container{
       border: solid 1px white;
