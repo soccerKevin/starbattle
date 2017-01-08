@@ -36,10 +36,18 @@ class MapCreator extends Map
     @controls.find('.change_size input').on 'click', =>
       false
 
+    @controls.find('.change_size input').on 'keyup', (event)=>
+      @replaceMap @changeSizeInput() if event.keyCode == 13
+
     @controls.off 'click', '.change_size'
     @controls.on 'click', '.change_size', =>
-      size = parseInt @controls.find('.change_size input').val()
-      MapService.newMap(size)
+      @replaceMap @changeSizeInput()
+
+  changeSizeInput: ->
+    parseInt @controls.find('.change_size input').val()
+
+  replaceMap: (size)->
+    MapService.newMap(size)
       .done (map) =>
         @element.replaceWith $(map.map)
         @element = $ '.map'
