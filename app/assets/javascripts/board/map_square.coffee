@@ -30,6 +30,6 @@ class MapSquare
   toJSON: ->
     state: @state
     group_index: @group()
-    color: @color()
+    color: @color().rgbaString()
 
 window.MapSquare = MapSquare
