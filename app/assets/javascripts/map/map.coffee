@@ -8,10 +8,12 @@ class Map
   @createFrom: (mapJSON)->
     $('body').append $("<div class='map_creator'></div>")
     $creator = $('.map_creator')
-    $element = $("<div class='map'></div>")
+    $element = $("<div class='map' size=#{mapJSON.width} ></div>")
     $creator.append $element
+    $squaresContainer = $("<div class='squares_container'></div>")
+    $element.append $squaresContainer
     for squareJSON in mapJSON.squares
-      $element.append MapSquare.HTMLfromJSON squareJSON
+      $squaresContainer.append MapSquare.HTMLfromJSON squareJSON
 
     map = new Map '.map_creator .map', mapJSON.name
     map.paintGroups()

@@ -1,5 +1,6 @@
 class MapSolver extends Map
-  constructor: ->
+  constructor: (map_selector='.map')->
+    super map_selector
     @controls = $('.map_controls .solve_controls').show()
     @handlers()
 
@@ -33,8 +34,8 @@ class MapSolver extends Map
     @controls.find('.map_index').val()
 
   replaceMap: (map)->
-    @map.element.siblings('.name').val map.name()
-    @map.element.replaceWith map.element
-    @map = map
+    @element.siblings('.name').val map.name()
+    @element.replaceWith map.element
+    @element = map.element
 
 window.MapSolver = MapSolver
