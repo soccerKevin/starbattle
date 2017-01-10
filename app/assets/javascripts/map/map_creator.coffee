@@ -1,6 +1,9 @@
 class MapCreator extends Map
   constructor: (map_selector='.map')->
     super map_selector
+    @create()
+
+  create: ->
     @board = new Board()
     @controls = $('.map_controls .create_controls').show()
     @currentGroupIndex = 0
@@ -48,9 +51,11 @@ class MapCreator extends Map
 
   replaceMap: (size)->
     MapService.newMap(size)
-      .done (map) =>
-        @element.replaceWith $(map.map)
-        @element = $ '.map'
+    .done (map) =>
+      newElement = $(map.map)
+      @element.replaceWith newElement
+      @element = newElement
+      @create()
 
   currentGroup: (resetGroups=false)->
     @board.groups(resetGroups)[@currentGroupIndex]
