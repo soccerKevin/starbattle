@@ -5,6 +5,7 @@
 #= require map/map_solver
 
 fixture.preload 'maps/easy1.html'
+fixture.preload 'maps/easy3.html'
 
 describe 'map solver', ->
   beforeAll ->
@@ -16,7 +17,7 @@ describe 'map solver', ->
     """)
 
   beforeEach ->
-    @map = $(fixture.load("maps/easy1.html", true)).find '.container'
+    @map = $(fixture.load("maps/easy3.html", true)).find '.container'
     @map.remove()
     $('body').append @map
 
